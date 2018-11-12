@@ -7,15 +7,7 @@
  //if head is null return 0
 int recursiveSum(Node* head) {
 	if(head == NULL) return 0; 
-
-	return RCSum(head); 
-}
-
-int RCSum(Node* head){
-	if(head == NULL){
-		return 0; 
-	}
-	return head->data + RCSum(head->next); 
+	return head->data + RCSum(head->next);  
 }
 
 
