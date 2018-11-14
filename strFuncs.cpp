@@ -11,22 +11,41 @@ using namespace std;
  * the case for the letters (upper or lower) should not
  * affect your result. 
  */
-bool isAnagram(string s1, string s2){
-	if(s1.size() != s2.size()) return false;
-	int a[26] = {0};
-	int b[26] = {0};
+//bool isAnagram(string s1, string s2){
+//	if(s1.size() != s2.size()) return false;
+//	int a[26] = {0};
+//	int b[26] = {0};
+//
+//	for(int i = 0; i< s1.size(); i++){
+//		a[a[i]-'a'] ++;
+//		b[b[i]-'a'] ++;
+//	}
+//
+//	for(int i = 0; i < 26; i++){
+//		if(a[i] != b[i]){
+//			return false; 
+//		}
+//	}
+//	return true; 
+//}
 
-	for(int i = 0; i< s1.size(); i++){
-		a[a[i]-'a'] ++;
-		b[b[i]-'a'] ++;
+bool isAnagram(string s1, string s2)
+{
+	const char* arr1 = s1.c_str();
+	const char* arr2 = s2.c_str();
+	int count[26] = { 0 };
+	for (int i = 0; i < s1.length(); i++) {
+		count[arr1[i] - 'a']++;
 	}
-
-	for(int i = 0; i < 26; i++){
-		if(a[i] != b[i]){
-			return false; 
-		}
+	for (int i = 0; i < s2.length(); i++) {
+		count[arr2[i] - 'a']--;
 	}
-	return true; 
+	for (int i = 0; i < 26; i++) {
+		if (count[i] != 0) {
+			return false;
+	}
+	}
+	return true;
 }
 
 /* Precondition: s1 is a valid string that may contain upper or lower case alphabets, no spaces or special characters
