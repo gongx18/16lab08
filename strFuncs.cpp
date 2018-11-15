@@ -24,9 +24,10 @@ bool isAnagram(string s1, string s2){
 	int b[26] = {0};
 
 	for(int i = 0; i < s1.length(); i ++){
-		a[a[i] - 'a'] ++;
-		b[b[i] - 'a'] ++;
+		a[s1[i] - 'a'] ++;
+		b[s2[i] - 'a'] ++;
 	}
+
 
     for (int i=0;i<26;i++){
         if(a[i] != b[i]){
