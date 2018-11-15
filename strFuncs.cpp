@@ -2,7 +2,8 @@
 #include <string>
 #include <cstring>
 #include <algorithm>
-#include "strFuncs.h"
+#include "strFuncs.h"       // std::string
+#include <locale>  
 using namespace std;
 
 
@@ -11,57 +12,45 @@ using namespace std;
  * the case for the letters (upper or lower) should not
  * affect your result. 
  */
-//bool isAnagram(string s1, string s2){
-//	if(s1.size() != s2.size()) return false;
-//	int a[26] = {0};
-//	int b[26] = {0};
-//
-//	for(int i = 0; i< s1.size(); i++){
-//		a[a[i]-'a'] ++;
-//		b[b[i]-'a'] ++;
-//	}
-//
-//	for(int i = 0; i < 26; i++){
-//		if(a[i] != b[i]){
-//			return false; 
-//		}
-//	}
-//	return true; 
-//}
+bool isAnagram(string s1, string s2){
+	for(int i = 0; i < s1.length(); i++){
+	    s1[i] = tolower(s1[i]);
+	}
+ 	for(int i = 0; i < s2.length(); i++){
+	    s2[i] = tolower(s2[i]); 
+	}
+	if(s1.size() != s2.size()) return false; 
+	int a[26] = {0};
+	int b[26] = {0};
 
-bool isAnagram(string s1, string s2)
-{
-	const char* arr1 = s1.c_str();
-	const char* arr2 = s2.c_str();
-	int count[26] = { 0 };
-	for (int i = 0; i < s1.length(); i++) {
-		count[arr1[i] - 'a']++;
+	for(int i = 0; i < s1.length(); i ++){
+		a[a[i] - 'a'] ++;
+		b[b[i] - 'a'] ++;
 	}
-	for (int i = 0; i < s2.length(); i++) {
-		count[arr2[i] - 'a']--;
-	}
-	for (int i = 0; i < 26; i++) {
-		if (count[i] != 0) {
-			return false;
-	}
-	}
-	return true;
+
+    for (int i=0;i<26;i++){
+        if(a[i] != b[i]){
+        	return false;
+        }
+    }
+    return true;
 }
+
 
 /* Precondition: s1 is a valid string that may contain upper or lower case alphabets, no spaces or special characters
  * Postcondition: Returns true if s1 is a palindrome, false otherwise
  * You should provide a recursive solution
  */
 bool isPalindrome(const string s1){
-	//end case
+	
         if(s1.size() == 0 || s1.size() == 1){
 		    return true; 
 	    }
-	//execucation step
-	    if(s1[0] != s1[s1.size()-1]){
+	
+	    if(tolower(s1[0]) != tolower(s1[s1.size()-1])){
 		    return false;
 	    }
-	//recursive step 
+
 	    return isPalindrome(s1.substr(1, s1.size()-2)); 
 }
 
